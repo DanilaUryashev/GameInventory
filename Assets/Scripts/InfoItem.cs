@@ -25,6 +25,7 @@ public class InfoItem : MonoBehaviour
     [SerializeField] GameObject UseButton;
     [SerializeField] GameObject deleteButton;
     [SerializeField] GameObject ammoButton;
+    [SerializeField] GameObject buyButton;
     private void Start()
     {
         infoBoard = gameObject;
@@ -39,6 +40,7 @@ public class InfoItem : MonoBehaviour
             deleteButton.SetActive(true);
             ammoButton.SetActive(false);
             UseButton.SetActive(false);
+            buyButton.SetActive(false);
         }
         else
         {
@@ -50,6 +52,7 @@ public class InfoItem : MonoBehaviour
                 deleteButton.SetActive(true);
                 ammoButton.SetActive(false);
                 UseButton.SetActive(false);
+                buyButton.SetActive(false);
             }
             else if (stackItem.type == ItemType.MedKit)
             {
@@ -58,6 +61,7 @@ public class InfoItem : MonoBehaviour
                 deleteButton.SetActive(true);
                 ammoButton.SetActive(false);
                 UseButton.SetActive(true);
+                buyButton.SetActive(false);
             }
             else
             {
@@ -66,6 +70,7 @@ public class InfoItem : MonoBehaviour
                 deleteButton.SetActive(false);
                 ammoButton.SetActive(true);
                 UseButton.SetActive(false);
+                buyButton.SetActive(true);
             }
         }
     }
@@ -159,6 +164,13 @@ public class InfoItem : MonoBehaviour
         infoBoard.SetActive(false);
 
 
+    }
+    public void ButtonBulletFull()
+    {
+        StackItem stackItem = selectItem.GetComponent<StackItem>();
+        stackItem.currentAmount = stackItem.maxStack;
+        stackItem.UpdateCurrentAmount();
+        infoBoard.SetActive(false);
     }
     public void ButtonUse()
     {
